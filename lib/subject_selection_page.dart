@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'pdf_viewer_page.dart';
 import 'models.dart';
+import 'pdf_viewer_page.dart';
 
 class SubjectSelectionPage extends StatelessWidget {
   final Semester semester;
+  final List<Department> departments;
 
-  SubjectSelectionPage({required this.semester});
+  SubjectSelectionPage({required this.semester, required this.departments});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +26,10 @@ class SubjectSelectionPage extends StatelessWidget {
               children: semester.subjects.map((subject) {
                 return ElevatedButton(
                   onPressed: () {
-                    // Navigate to the PDF viewer page with the selected subject's PDF path
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PdfViewerPage(pdfPath: subject.pdfPath),
+                        builder: (context) => PdfViewerPage(subject: subject),
                       ),
                     );
                   },

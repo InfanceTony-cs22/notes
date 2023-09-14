@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'semester_selection_page.dart';
 import 'models.dart';
+import 'semester_selection_page.dart';
 
 class DepartmentSelectionPage extends StatelessWidget {
   final List<Department> departments;
@@ -28,7 +28,8 @@ class DepartmentSelectionPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SemesterSelectionPage(department: department),
+                        builder: (context) =>
+                            SemesterSelectionPage(department: department, departments: departments),
                       ),
                     );
                   },

@@ -14,8 +14,7 @@ class StudyMaterialsApp extends StatelessWidget {
       title: 'Study Materials App',
       initialRoute: '/departments',
       routes: {
-        '/departments': (context) => DepartmentSelectionPage(departments:departments),
-        // Add routes for other pages as needed
+        '/departments': (context) => DepartmentSelectionPage(departments: departments),
       },
     );
   }

@@ -1,5 +1,3 @@
-// lib/models.dart
-
 class Department {
   final String name;
   final List<Semester> semesters;
@@ -16,7 +14,7 @@ class Semester {
 
 class Subject {
   final String name;
-  final String pdfPath; // Add a field for the PDF file path
+  final String link;
 
-  Subject({required this.name, required this.pdfPath});
+  Subject({required this.name, required this.link});
 }

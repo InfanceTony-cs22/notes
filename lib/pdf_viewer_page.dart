@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'models.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class PdfViewerPage extends StatefulWidget {
-  final String pdfPath;
 
-  PdfViewerPage({required this.pdfPath});
+class PdfViewerPage extends StatelessWidget {
+  final Subject subject;
 
-  @override
-  _PdfViewerPageState createState() => _PdfViewerPageState();
-}
-
-class _PdfViewerPageState extends State<PdfViewerPage> {
-  int currentPage = 1; // Initialize with the first page
+  PdfViewerPage({required this.subject});
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +14,29 @@ class _PdfViewerPageState extends State<PdfViewerPage> {
       appBar: AppBar(
         title: Text('PDF Viewer'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: PDFView(
-              filePath: widget.pdfPath,
-              onPageChanged: (int? page, int? total) {
-                if (page != null && total != null) {
-                  setState(() {
-                    currentPage = page;
-                  });
-                }
-              },
-              enableSwipe: true,
-              swipeHorizontal: true,
-              autoSpacing: false,
-              pageFling: false,
-              onError: (error) {
-                print(error);
-              },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Subject: ${subject.name}',
+              style: TextStyle(fontSize: 20),
             ),
-          ),
-          Text('Page $currentPage'), // Display the current page number
-        ],
+        ElevatedButton(
+          onPressed: () async {
+            // Check if the URL is valid before launching
+            if (await canLaunch(subject.link)) {
+              await launch(subject.link);
+            } else {
+              // Handle the case where the URL cannot be launched
+              // For example, show an error message or log the issue
+              print('Could not launch ${subject.link}');
+            }
+          },
+          child: Text('Download PDF'),
+        ),
+          ],
+        ),
       ),
     );
   }

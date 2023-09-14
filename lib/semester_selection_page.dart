@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'subject_selection_page.dart';
 import 'models.dart';
+import 'subject_selection_page.dart';
 
 class SemesterSelectionPage extends StatelessWidget {
   final Department department;
+  final List<Department> departments;
 
-  SemesterSelectionPage({required this.department});
+  SemesterSelectionPage({required this.department, required this.departments});
 
   @override
   Widget build(BuildContext context) {
+    final List<Semester> semesters = department.semesters;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Select Semester'),
@@ -22,24 +25,24 @@ class SemesterSelectionPage extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
             Column(
-              children: department.semesters.map((semester) {
+              children: List.generate(semesters.length, (index) {
                 return ElevatedButton(
                   onPressed: () {
-                    // Navigate to the subject selection page with the selected semester
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SubjectSelectionPage(semester: semester),
+                        builder: (context) =>
+                            SubjectSelectionPage(semester: semesters[index], departments: departments),
                       ),
                     );
                   },
                   child: Container(
                     width: double.infinity,
-                    child: Text('Semester ${semester.number}'),
+                    child: Text('Semester ${semesters[index].number}'),
                     alignment: Alignment.center,
                   ),
                 );
-              }).toList(),
+              }),
             ),
           ],
         ),
