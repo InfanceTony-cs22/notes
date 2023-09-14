@@ -1,8 +1,12 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'semester_selection_page.dart';
+import 'models.dart';
 
 class DepartmentSelectionPage extends StatelessWidget {
+  final List<Department> departments;
+
+  DepartmentSelectionPage({required this.departments});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,50 +17,29 @@ class DepartmentSelectionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Choose a Department:', style: TextStyle(
-              fontSize: 20
-            ),),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/semesters');
-              },
-
-              child:Container(width:double.infinity,
-
-              child: Text("CSE"),alignment: Alignment.center,
-              )
-
-
+            Text(
+              'Choose a Department:',
+              style: TextStyle(fontSize: 20),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/semesters');
-              },
-                child:Container(width:double.infinity,
-                  child: Text("MECH"),alignment: Alignment.center,)
+            Column(
+              children: departments.map((department) {
+                return ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SemesterSelectionPage(department: department),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    child: Text(department.name),
+                    alignment: Alignment.center,
+                  ),
+                );
+              }).toList(),
             ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/semesters');
-            },
-              child:Container(width:double.infinity,
-                child: Text("ECE"),alignment: Alignment.center,)
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/semesters');
-            },
-              child:Container(padding: const EdgeInsets.symmetric(horizontal: 160),
-                child: Text("CIVIL"),alignment: Alignment.center,)
-          ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/semesters');
-          },
-            child:Container(width:double.infinity,
-              child: Text("EEE"),alignment: Alignment.center,))
-
-          //// Add buttons for other departments
           ],
         ),
       ),

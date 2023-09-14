@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/department_selection_page.dart';
-import 'package:untitled/semester_selection_page.dart';
-import 'package:untitled/subject_selection_page.dart';
-import 'package:untitled/pdf_viewer_page.dart';
+import 'department_selection_page.dart';
+import 'models.dart';
+import 'sample_data.dart';
 
 void main() {
   runApp(StudyMaterialsApp());
@@ -15,10 +14,8 @@ class StudyMaterialsApp extends StatelessWidget {
       title: 'Study Materials App',
       initialRoute: '/departments',
       routes: {
-        '/departments': (context) => DepartmentSelectionPage(),
-        '/semesters': (context) => SemesterSelectionPage(),
-        '/subjects': (context) => SubjectSelectionPage(),
-        '/pdf_viewer': (context) => PdfViewerPage(),
+        '/departments': (context) => DepartmentSelectionPage(departments:departments),
+        // Add routes for other pages as needed
       },
     );
   }
