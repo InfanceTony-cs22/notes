@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'models.dart';
-import 'pdf_viewer_page.dart';
+import 'FileDownloaderPage.dart';
 
 class SubjectSelectionPage extends StatelessWidget {
   final Semester semester;
@@ -29,7 +29,7 @@ class SubjectSelectionPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PdfViewerPage(subject: subject),
+                        builder: (context) => FileDownloaderPage(subject: subject),
                       ),
                     );
                   },
