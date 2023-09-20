@@ -16,36 +16,47 @@ class SemesterSelectionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Select Semester'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Choose a Semester:',
-              style: TextStyle(fontSize: 20),
-            ),
-            Column(
-              children: List.generate(semesters.length, (index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SubjectSelectionPage(semester: semesters[index], departments: departments),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Added spaceEvenly
+        children: [
+          SizedBox(height: 120), // Added space above "Choose a Semester" text
+          Text(
+            'Semester:',
+            style: TextStyle(fontSize: 30), // Increased font size
+          ),
+          SizedBox(height:120), // Added space below "Choose a Semester" text
+          Expanded(
+            child: ListView.builder(
+              itemCount: semesters.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text(
+                        'Semester ${semesters[index].number}',
+                        style: TextStyle(fontSize: 20),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text('Semester ${semesters[index].number}'),
-                    alignment: Alignment.center,
+                      trailing: Icon(Icons.arrow_forward),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubjectSelectionPage(
+                              semester: semesters[index],
+                              departments: departments,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              }),
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

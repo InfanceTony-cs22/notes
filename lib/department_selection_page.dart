@@ -11,38 +11,51 @@ class DepartmentSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Department'),
+        title: Text('Department Selection'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Choose a Department:',
-              style: TextStyle(fontSize: 20),
-            ),
-            Column(
-              children: departments.map((department) {
-                return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SemesterSelectionPage(department: department, departments: departments),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Added spaceEvenly
+        children: [
+          SizedBox(height: 120), // Added space above "Department" text
+          Text(
+            "Department",
+            style: TextStyle(fontSize: 30),
+          ), SizedBox(height: 120),
+          Text("Choose You Department"),
+          // Added space below "Department" text
+          Expanded(
+            child: ListView.builder(
+              itemCount: departments.length,
+              itemBuilder: (context, index) {
+                Department department = departments[index];
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text(
+                        department.name,
+                        style: TextStyle(fontSize: 20),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text(department.name),
-                    alignment: Alignment.center,
+                      trailing: Icon(Icons.arrow_forward),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SemesterSelectionPage(
+                              department: department,
+                              departments: departments,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              }).toList(),
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
