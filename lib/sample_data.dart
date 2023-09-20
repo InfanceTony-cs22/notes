@@ -288,6 +288,7 @@ final List<Department> departments = [
       Semester(
         number: 5,
         subjects: [
+
           Subject(name: 'ME3591 Design of Machine Elements', link: 'https://example.com/subject2.1.pdf'),
           Subject(name: 'ME3592 Metrology and Measurements', link: 'https://example.com/subject2.2.pdf'),
           Subject(name: 'ME3511 Summer Internship', link: 'https://example.com/subject2.2.pdf'),
