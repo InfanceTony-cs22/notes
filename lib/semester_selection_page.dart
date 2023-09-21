@@ -4,9 +4,8 @@ import 'subject_selection_page.dart';
 
 class SemesterSelectionPage extends StatelessWidget {
   final Department department;
-  final List<Department> departments;
 
-  SemesterSelectionPage({required this.department, required this.departments});
+  SemesterSelectionPage({required this.department});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +16,14 @@ class SemesterSelectionPage extends StatelessWidget {
         title: Text('Select Semester'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Added spaceEvenly
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(height: 120), // Added space above "Choose a Semester" text
+          SizedBox(height: 120),
           Text(
             'Semester:',
-            style: TextStyle(fontSize: 30), // Increased font size
+            style: TextStyle(fontSize: 30),
           ),
-          SizedBox(height:120), // Added space below "Choose a Semester" text
+          SizedBox(height: 120),
           Expanded(
             child: ListView.builder(
               itemCount: semesters.length,
@@ -45,7 +44,6 @@ class SemesterSelectionPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => SubjectSelectionPage(
                               semester: semesters[index],
-                              departments: departments,
                             ),
                           ),
                         );

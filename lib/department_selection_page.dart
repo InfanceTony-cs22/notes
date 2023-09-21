@@ -14,22 +14,22 @@ class DepartmentSelectionPage extends StatelessWidget {
         title: Text('Department Selection'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Added spaceEvenly
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 120), // Added space above "Department" text
+          SizedBox(height: 20),
           Text(
             "Department",
             style: TextStyle(fontSize: 30),
-          ), SizedBox(height: 120),
-          Text("Choose You Department"),
-          // Added space below "Department" text
+          ),
+          SizedBox(height: 20),
+          Text("Choose Your Department"),
           Expanded(
             child: ListView.builder(
               itemCount: departments.length,
               itemBuilder: (context, index) {
                 Department department = departments[index];
                 return Padding(
-                  padding: const EdgeInsets.all(2.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Card(
                     elevation: 5,
                     child: ListTile(
@@ -44,7 +44,6 @@ class DepartmentSelectionPage extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => SemesterSelectionPage(
                               department: department,
-                              departments: departments,
                             ),
                           ),
                         );
