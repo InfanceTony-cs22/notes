@@ -465,5 +465,5 @@ final List<Department> departments = [
       ),
       // Add more semesters for Mechanical Engineering
     ],
-  ),
+  ),//department
 ];
