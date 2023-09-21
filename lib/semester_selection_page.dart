@@ -4,9 +4,8 @@ import 'subject_selection_page.dart';
 
 class SemesterSelectionPage extends StatelessWidget {
   final Department department;
-  final List<Department> departments;
 
-  SemesterSelectionPage({required this.department, required this.departments});
+  SemesterSelectionPage({required this.department});
 
   @override
   Widget build(BuildContext context) {
@@ -16,36 +15,46 @@ class SemesterSelectionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Select Semester'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Choose a Semester:',
-              style: TextStyle(fontSize: 20),
-            ),
-            Column(
-              children: List.generate(semesters.length, (index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SubjectSelectionPage(semester: semesters[index], departments: departments),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(height: 120),
+          Text(
+            'Semester:',
+            style: TextStyle(fontSize: 30),
+          ),
+          SizedBox(height: 120),
+          Expanded(
+            child: ListView.builder(
+              itemCount: semesters.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text(
+                        'Semester ${semesters[index].number}',
+                        style: TextStyle(fontSize: 20),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text('Semester ${semesters[index].number}'),
-                    alignment: Alignment.center,
+                      trailing: Icon(Icons.arrow_forward),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubjectSelectionPage(
+                              semester: semesters[index],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              }),
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

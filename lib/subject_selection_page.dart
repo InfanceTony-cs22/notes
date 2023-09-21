@@ -4,9 +4,8 @@ import 'FileDownloaderPage.dart';
 
 class SubjectSelectionPage extends StatelessWidget {
   final Semester semester;
-  final List<Department> departments;
 
-  SubjectSelectionPage({required this.semester, required this.departments});
+  SubjectSelectionPage({required this.semester});
 
   @override
   Widget build(BuildContext context) {
@@ -14,35 +13,45 @@ class SubjectSelectionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Select Subject'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Choose a Subject:',
-              style: TextStyle(fontSize: 20),
-            ),
-            Column(
-              children: semester.subjects.map((subject) {
-                return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FileDownloaderPage(subject: subject),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(height: 120),
+          Text(
+            'Choose a Subject:',
+            style: TextStyle(fontSize: 30),
+          ),
+          SizedBox(height: 60),
+          Expanded(
+            child: ListView.builder(
+              itemCount: semester.subjects.length,
+              itemBuilder: (context, index) {
+                Subject subject = semester.subjects[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text(
+                        subject.name,
+                        style: TextStyle(fontSize: 20),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text(subject.name),
-                    alignment: Alignment.center,
+                      trailing: Icon(Icons.arrow_forward),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FileDownloaderPage(subject: subject),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              }).toList(),
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

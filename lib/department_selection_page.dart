@@ -11,38 +11,50 @@ class DepartmentSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Department'),
+        title: Text('Department Selection'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Choose a Department:',
-              style: TextStyle(fontSize: 20),
-            ),
-            Column(
-              children: departments.map((department) {
-                return ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            SemesterSelectionPage(department: department, departments: departments),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: 20),
+          Text(
+            "Department",
+            style: TextStyle(fontSize: 30),
+          ),
+          SizedBox(height: 20),
+          Text("Choose Your Department"),
+          Expanded(
+            child: ListView.builder(
+              itemCount: departments.length,
+              itemBuilder: (context, index) {
+                Department department = departments[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text(
+                        department.name,
+                        style: TextStyle(fontSize: 20),
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text(department.name),
-                    alignment: Alignment.center,
+                      trailing: Icon(Icons.arrow_forward),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SemesterSelectionPage(
+                              department: department,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              }).toList(),
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
