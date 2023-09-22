@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'department_selection_page.dart';
 import 'models.dart';
+import 'package:timer_builder/timer_builder.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 Future<List<Department>> fetchDepartments() async {
   final response = await http.get(Uri.parse('https://github.com/Bennyhinn18/Files/raw/main/data.json'));
@@ -15,7 +16,6 @@ Future<List<Department>> fetchDepartments() async {
   }
 }
 
-
 void main() {
   runApp(StudyMaterialsApp());
 }
@@ -25,21 +25,25 @@ class StudyMaterialsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Study Materials App',
-      home: FutureBuilder<List<Department>>(
-        future: fetchDepartments(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator(); // or any loading widget you prefer
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            List<Department>? departments = snapshot.data;
-            if (departments != null) {
-              return DepartmentSelectionPage(departments: departments);
-            } else {
-              return Text('No data available');
-            }
-          }
+      home: TimerBuilder.periodic(Duration(minutes: 30), // Check every 30 minutes
+        builder: (context) {
+          return FutureBuilder<List<Department>>(
+            future: fetchDepartments(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator(); // or any loading widget you prefer
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                List<Department>? departments = snapshot.data;
+                if (departments != null) {
+                  return DepartmentSelectionPage(departments: departments);
+                } else {
+                  return Text('No data available');
+                }
+              }
+            },
+          );
         },
       ),
     );
