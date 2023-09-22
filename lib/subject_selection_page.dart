@@ -4,9 +4,8 @@ import 'FileDownloaderPage.dart';
 
 class SubjectSelectionPage extends StatelessWidget {
   final Semester semester;
-  final List<Department> departments;
 
-  SubjectSelectionPage({required this.semester, required this.departments});
+  SubjectSelectionPage({required this.semester});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +14,14 @@ class SubjectSelectionPage extends StatelessWidget {
         title: Text('Select Subject'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Added spaceEvenly
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(height: 120), // Added space above "Choose a Subject" text
+          SizedBox(height: 120),
           Text(
             'Choose a Subject:',
-            style: TextStyle(fontSize: 30), // Increased font size
+            style: TextStyle(fontSize: 30),
           ),
-          SizedBox(height: 60), // Added space below "Choose a Subject" text
+          SizedBox(height: 60),
           Expanded(
             child: ListView.builder(
               itemCount: semester.subjects.length,
