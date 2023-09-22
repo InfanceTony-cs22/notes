@@ -10,18 +10,16 @@ class SubjectSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select Subject'),
-      ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(height: 120),
+          SizedBox(height: 180),
           Text(
             'Choose a Subject:',
             style: TextStyle(fontSize: 30),
           ),
-          SizedBox(height: 60),
+          SizedBox(height: 120),
           Expanded(
             child: ListView.builder(
               itemCount: semester.subjects.length,

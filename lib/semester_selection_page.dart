@@ -12,13 +12,11 @@ class SemesterSelectionPage extends StatelessWidget {
     final List<Semester> semesters = department.semesters;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select Semester'),
-      ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(height: 120),
+          SizedBox(height: 180),
           Text(
             'Semester:',
             style: TextStyle(fontSize: 30),

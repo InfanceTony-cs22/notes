@@ -10,18 +10,16 @@ class DepartmentSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Department Selection'),
-      ),
+
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
+          SizedBox(height: 180),
           Text(
             "Department",
             style: TextStyle(fontSize: 30),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 120),
           Text("Choose Your Department"),
           Expanded(
             child: ListView.builder(
