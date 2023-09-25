@@ -10,11 +10,10 @@ class DepartmentSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 180),
+          SizedBox(height: 120),
           Text(
             "Department",
             style: TextStyle(fontSize: 30),
@@ -22,13 +21,14 @@ class DepartmentSelectionPage extends StatelessWidget {
           SizedBox(height: 120),
           Text("Choose Your Department"),
           Expanded(
-            child: ListView.builder(
-              itemCount: departments.length,
-              itemBuilder: (context, index) {
-                Department department = departments[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
+            child: Container( // Added Container
+              padding: EdgeInsets.symmetric(horizontal: 16), // Added padding
+              child: ListView.separated( // Changed to ListView.separated
+                itemCount: departments.length,
+                separatorBuilder: (BuildContext context, int index) => Divider(), // Added Divider
+                itemBuilder: (context, index) {
+                  Department department = departments[index];
+                  return Card(
                     elevation: 5,
                     child: ListTile(
                       title: Text(
@@ -47,9 +47,9 @@ class DepartmentSelectionPage extends StatelessWidget {
                         );
                       },
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ],

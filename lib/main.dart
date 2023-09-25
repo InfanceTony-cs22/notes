@@ -33,7 +33,14 @@ class StudyMaterialsApp extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator(); // or any loading widget you prefer
               } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
+                if (snapshot.error is http.ClientException) {
+                  return Center(
+                    child: Text('Please connect to the Internet'),
+
+                  );
+                } else {
+                  return Text('Error: ${snapshot.error}');
+                }
               } else {
                 List<Department>? departments = snapshot.data;
                 if (departments != null) {
