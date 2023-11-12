@@ -19,8 +19,7 @@ class SemesterSelectionPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(height: 120),
-          Text(
-            'Semester:',
+          Text('Semester:',
             style: TextStyle(fontSize: 30),
           ),
           SizedBox(height: 120),
